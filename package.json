@@ -1,0 +1,44 @@
+{
+  "name": "miiajs-benchmarks",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.1"
+  },
+  "scripts": {
+    "bench": "bun run run.ts",
+    "use:local": "node scripts/use-mode.mjs local && bun install",
+    "use:npm": "node scripts/use-mode.mjs npm && bun install"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1",
+    "@fastify/cors": "^11",
+    "@hono/node-server": "^1.14",
+    "@miiajs/core": "^0.1.0",
+    "@miiajs/node-server": "^0.1.0",
+    "@miiajs/uws-server": "^0.1.0",
+    "@nestjs/common": "^11",
+    "@nestjs/core": "^11",
+    "@nestjs/platform-fastify": "^11",
+    "@sinclair/typebox": "^0.34",
+    "@whatwg-node/server": "^0.10.18",
+    "elysia": "^1.2",
+    "fastify": "^5.3",
+    "hono": "^4.7",
+    "jose": "^6",
+    "reflect-metadata": "^0.2",
+    "rxjs": "^7.8",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.61.0"
+  },
+  "devDependencies": {
+    "@inquirer/prompts": "^8.3.2",
+    "autocannon": "^8",
+    "tsx": "^4.21"
+  },
+  "overrides": {
+    "uWebSockets.js": "$uWebSockets.js",
+    "@miiajs/core": "file:../miia/packages/core",
+    "@miiajs/node-server": "file:../miia/packages/node-server",
+    "@miiajs/uws-server": "file:../miia/packages/uws-server"
+  }
+}
