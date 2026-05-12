@@ -28,7 +28,7 @@
     "jose": "^6",
     "reflect-metadata": "^0.2",
     "rxjs": "^7.8",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.61.0"
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.64.0"
   },
   "devDependencies": {
     "@inquirer/prompts": "^8.3.2",
@@ -36,9 +36,6 @@
     "tsx": "^4.21"
   },
   "overrides": {
-    "uWebSockets.js": "$uWebSockets.js",
-    "@miiajs/core": "file:../miia/packages/core",
-    "@miiajs/node-server": "file:../miia/packages/node-server",
-    "@miiajs/uws-server": "file:../miia/packages/uws-server"
+    "uWebSockets.js": "$uWebSockets.js"
   }
 }

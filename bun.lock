@@ -22,7 +22,7 @@
         "jose": "^6",
         "reflect-metadata": "^0.2",
         "rxjs": "^7.8",
-        "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.61.0",
+        "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.64.0",
       },
       "devDependencies": {
         "@inquirer/prompts": "^8.3.2",
@@ -32,10 +32,7 @@
     },
   },
   "overrides": {
-    "@miiajs/core": "file:../miia/packages/core",
-    "@miiajs/node-server": "file:../miia/packages/node-server",
-    "@miiajs/uws-server": "file:../miia/packages/uws-server",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.61.0",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.64.0",
   },
   "packages": {
     "@assemblyscript/loader": ["@assemblyscript/loader@0.19.23", "", {}, "sha512-ulkCYfFbYj01ie1MDOyxv2F6SpRN1TOj7fQxbP07D6HmeR+gr2JLSmINKjga2emB+b1L2KGrFKBTc+e00p54nw=="],
@@ -154,11 +151,11 @@
 
     "@lukeed/csprng": ["@lukeed/csprng@1.1.0", "", {}, "sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA=="],
 
-    "@miiajs/core": ["@miiajs/core@file:../miia/packages/core", { "peerDependencies": { "zod": ">=3.0.0" }, "optionalPeers": ["zod"] }],
+    "@miiajs/core": ["@miiajs/core@0.1.0", "", {}, "sha512-6tgneeOAgBqmdBbbwk5DWZ3albYpQELRxpMif2CTeUfMm3KfS8yzAGS50TdP+ZG+Xg2mJXjYzpkBpwL0i2UJ6A=="],
 
-    "@miiajs/node-server": ["@miiajs/node-server@file:../miia/packages/node-server", {}],
+    "@miiajs/node-server": ["@miiajs/node-server@0.1.0", "", {}, "sha512-3MF24LKwEeYBtEXz0RRhkf3yKE3v0SePDtJXyKSI4aTqn2553zm9NAsGSFONA0mTe5GOacmmCKAyLvxi6mPv4w=="],
 
-    "@miiajs/uws-server": ["@miiajs/uws-server@file:../miia/packages/uws-server", { "peerDependencies": { "uWebSockets.js": ">=20.61.0" } }],
+    "@miiajs/uws-server": ["@miiajs/uws-server@0.1.0", "", { "dependencies": { "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.64.0" } }, "sha512-PKEyzNHKJNOt0VP7cJpcZ6WONrAyQjTfY8+SY3xC92Btjlg9sxiI2DOXok8vb7n9ETul1JuWVoaXCU1v9KTmwg=="],
 
     "@minimistjs/subarg": ["@minimistjs/subarg@1.0.0", "", { "dependencies": { "minimist": "^1.1.0" } }, "sha512-Q/ONBiM2zNeYUy0mVSO44mWWKYM3UHuEK43PKIOzJCbvUnPoMH1K+gk3cf1kgnCVJFlWmddahQQCmrmBGlk9jQ=="],
 
@@ -446,7 +443,7 @@
 
     "tsx": ["tsx@4.21.0", "", { "dependencies": { "esbuild": "~0.27.0", "get-tsconfig": "^4.7.5" }, "optionalDependencies": { "fsevents": "~2.3.3" }, "bin": { "tsx": "dist/cli.mjs" } }, "sha512-5C1sg4USs1lfG0GFb2RLXsdpXqBSEhAaA/0kPL01wxzpMqLILNxIxIOKiILz+cdg/pLnOUxFYOR5yhHU666wbw=="],
 
-    "uWebSockets.js": ["uWebSockets.js@github:uNetworking/uWebSockets.js#cf2e4a8", {}, "uNetworking-uWebSockets.js-cf2e4a8", "sha512-VVkXVJk3NcIZUCuEDCjag5ql7l9Ei7bm7txpD9bBVB4ah1qQYT1lTcJNyV1Sc4rGrq3zhXJHNOKQt3/HouyFMw=="],
+    "uWebSockets.js": ["uWebSockets.js@github:uNetworking/uWebSockets.js#09c62a4", {}, "uNetworking-uWebSockets.js-09c62a4", "sha512-v3eU+NLIHcW3qJL+dvgcmgQbAJwrStS6JTupdR/1m1Q6r6C6WQJxY9rHULeISf/YXFdlOAXfCdCYERzix662QQ=="],
 
     "uid": ["uid@2.0.2", "", { "dependencies": { "@lukeed/csprng": "^1.0.0" } }, "sha512-u3xV3X7uzvi5b1MncmZo3i2Aw222Zk1keqLA1YkHldREkAhAqi65wuPfe7lHx8H/Wzy+8CE7S7uS3jekIM5s8g=="],
 
