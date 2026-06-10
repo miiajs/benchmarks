@@ -43,26 +43,13 @@ The server registry lives in `SYNTHETIC_SERVERS` and `REALISTIC_SERVERS` arrays 
 
 Bun's `link:` protocol is for packages registered via `bun link` (global link registry). It **does not** accept relative paths — trying `link:../miia/packages/core` produces `FileNotFound: failed linking dependency/workspace to node_modules`. Use `file:` — it accepts relative paths and (for directories, not tarballs) creates per-file symlinks into the source, which is what we want for dev iteration.
 
-### 2. `uWebSockets.js` must be a direct dep + override
+### 2. `uWebSockets.js` resolves through `@miiajs/uws-server` (no workaround as of 0.2.0)
 
-`@miiajs/uws-server` declares `uWebSockets.js` as a **peerDependency**. In the miia monorepo, a root-level `overrides: { "uWebSockets.js": "$uWebSockets.js" }` force-routed all resolutions to the github devDep. Benchmarks inherited this via workspace hoisting.
+`@miiajs/uws-server@0.2.0+` declares `uWebSockets.js` as a regular **dependency** (`github:uNetworking/uWebSockets.js#v20.68.0`), so bun resolves it transitively with no help from this repo. No top-level dep, no `overrides` entry.
 
-In this standalone repo that plumbing is gone. The working pattern is:
+Historical note (≤0.1.0): `uws-server` declared `uWebSockets.js` as a **peerDependency**, which bun tried to fetch from npm and got a 404. The fix was a top-level `dependencies["uWebSockets.js"] = "github:..."` plus `overrides: { "uWebSockets.js": "$uWebSockets.js" }` to force the github URL everywhere. Both were removed when bumping to 0.2.0 — if you ever pin back to a peerDependency version, that pattern is what you need to restore.
 
-```json
-{
-  "dependencies": {
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.61.0"
-  },
-  "overrides": {
-    "uWebSockets.js": "$uWebSockets.js"
-  }
-}
-```
-
-Without the override, bun attempts to fetch `uWebSockets.js` from npm (for the transitive peerDep path) and fails with 404. The `$uWebSockets.js` self-reference forces it to use the top-level dep's github URL everywhere.
-
-**This override is not managed by `use-mode.mjs`** — it's needed in both modes and stays committed. The script only touches `@miiajs/*` entries.
+`use-mode.mjs` only touches `@miiajs/*` overrides; in npm mode it deletes the `overrides` key entirely once empty, so a clean checkout has no `overrides` field at all.
 
 ### 3. Local mode detection via `package.json`, not the package dir
 
