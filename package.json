@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.22.1"
+    "node": ">=22.22.1",
+    "bun": ">=1.3.11",
+    "deno": ">=2.6.1"
   },
   "scripts": {
     "bench": "bun run run.ts",
@@ -14,9 +16,9 @@
     "@elysiajs/cors": "^1",
     "@fastify/cors": "^11",
     "@hono/node-server": "^1.14",
-    "@miiajs/core": "^0.1.0",
-    "@miiajs/node-server": "^0.1.0",
-    "@miiajs/uws-server": "^0.1.0",
+    "@miiajs/core": "^0.2.0",
+    "@miiajs/node-server": "^0.2.0",
+    "@miiajs/uws-server": "^0.2.0",
     "@nestjs/common": "^11",
     "@nestjs/core": "^11",
     "@nestjs/platform-fastify": "^11",
@@ -27,8 +29,7 @@
     "hono": "^4.7",
     "jose": "^6",
     "reflect-metadata": "^0.2",
-    "rxjs": "^7.8",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.64.0"
+    "rxjs": "^7.8"
   },
   "devDependencies": {
     "@inquirer/prompts": "^8.3.2",
@@ -36,6 +37,5 @@
     "tsx": "^4.21"
   },
   "overrides": {
-    "uWebSockets.js": "$uWebSockets.js"
   }
 }
