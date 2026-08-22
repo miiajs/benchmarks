@@ -13,27 +13,27 @@
     "use:npm": "node scripts/use-mode.mjs npm && bun install"
   },
   "dependencies": {
-    "@elysiajs/cors": "^1",
-    "@fastify/cors": "^11",
-    "@hono/node-server": "^1.14",
-    "@miiajs/core": "^0.2.0",
-    "@miiajs/node-server": "^0.2.0",
-    "@miiajs/uws-server": "^0.2.0",
-    "@nestjs/common": "^11",
-    "@nestjs/core": "^11",
-    "@nestjs/platform-fastify": "^11",
-    "@sinclair/typebox": "^0.34",
+    "@elysiajs/cors": "^1.4.2",
+    "@fastify/cors": "^11.3.0",
+    "@hono/node-server": "^2.1.1",
+    "@miiajs/core": "^0.6.0",
+    "@miiajs/node-server": "^0.6.0",
+    "@miiajs/uws-server": "^0.6.0",
+    "@nestjs/common": "^11.2.1",
+    "@nestjs/core": "^11.2.1",
+    "@nestjs/platform-fastify": "^11.2.1",
+    "@sinclair/typebox": "^0.34.52",
     "@whatwg-node/server": "^0.10.18",
-    "elysia": "^1.2",
-    "fastify": "^5.3",
-    "hono": "^4.7",
-    "jose": "^6",
-    "reflect-metadata": "^0.2",
-    "rxjs": "^7.8"
+    "elysia": "^1.4.29",
+    "fastify": "^5.12.1",
+    "hono": "^4.13.3",
+    "jose": "^6.2.9",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@inquirer/prompts": "^8.3.2",
-    "autocannon": "^8",
-    "tsx": "^4.21"
+    "@inquirer/prompts": "^8.6.0",
+    "autocannon": "^8.0.0",
+    "tsx": "^4.23.12"
   }
 }
