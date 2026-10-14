@@ -30,10 +30,10 @@ The server registry lives in `SYNTHETIC_SERVERS` and `REALISTIC_SERVERS` arrays 
 
 ## Two dependency modes
 
-`@miiajs/core`, `@miiajs/node-server`, `@miiajs/uws-server` can resolve from npm (after publish) or from a sibling `../miia` checkout for dev iteration. A single `package.json` holds semver `^0.1.0` as source of truth; `scripts/use-mode.mjs` toggles an `overrides` field.
+`@miiajs/core`, `@miiajs/node-server`, `@miiajs/uws-server` can resolve from npm or from a sibling `../miia` checkout for dev iteration. A single `package.json` holds a semver range of the published version as source of truth; `scripts/use-mode.mjs` toggles an `overrides` field.
 
-- `bun run use:local` — sets `overrides["@miiajs/*"] = "file:../miia/packages/<name>"` and runs `bun install`.
-- `bun run use:npm` — deletes those overrides and runs `bun install`.
+- `bun run use:local` - sets `overrides["@miiajs/*"] = "file:../miia/packages/<name>"` (plus `@miiajs/testing`, see gotcha 6) and runs `bun install`.
+- `bun run use:npm` - deletes those overrides in two installs (gotcha 6).
 
 `use:local` mutates `package.json`. The diff shows up in `git status` during dev sessions and **must not be committed**. Switch back to `use:npm` before committing other changes.
 
@@ -43,11 +43,9 @@ The server registry lives in `SYNTHETIC_SERVERS` and `REALISTIC_SERVERS` arrays 
 
 Bun's `link:` protocol is for packages registered via `bun link` (global link registry). It **does not** accept relative paths — trying `link:../miia/packages/core` produces `FileNotFound: failed linking dependency/workspace to node_modules`. Use `file:` — it accepts relative paths and (for directories, not tarballs) creates per-file symlinks into the source, which is what we want for dev iteration.
 
-### 2. `uWebSockets.js` resolves through `@miiajs/uws-server` (no workaround as of 0.2.0)
+### 2. `uWebSockets.js` resolves through `@miiajs/uws-server`
 
-`@miiajs/uws-server@0.2.0+` declares `uWebSockets.js` as a regular **dependency** (`github:uNetworking/uWebSockets.js#v20.68.0`), so bun resolves it transitively with no help from this repo. No top-level dep, no `overrides` entry.
-
-Historical note (≤0.1.0): `uws-server` declared `uWebSockets.js` as a **peerDependency**, which bun tried to fetch from npm and got a 404. The fix was a top-level `dependencies["uWebSockets.js"] = "github:..."` plus `overrides: { "uWebSockets.js": "$uWebSockets.js" }` to force the github URL everywhere. Both were removed when bumping to 0.2.0 — if you ever pin back to a peerDependency version, that pattern is what you need to restore.
+`@miiajs/uws-server` declares `uWebSockets.js` as a regular **dependency** (`github:uNetworking/uWebSockets.js#v<version>`), so bun resolves it transitively with no help from this repo. No top-level dep, no `overrides` entry.
 
 `use-mode.mjs` only touches `@miiajs/*` overrides; in npm mode it deletes the `overrides` key entirely once empty, so a clean checkout has no `overrides` field at all.
 
@@ -69,6 +67,12 @@ If miia packages gain a new runtime dependency, run `bun install` in `../miia` f
 ### 5. Results directory is inside the repo
 
 `saveResults()` writes to `join(SCRIPT_DIR, 'tmp', 'benchmarks', type)`. The original monorepo `run.ts` had `join(SCRIPT_DIR, '..', 'tmp', ...)` — after extraction that would escape into the parent workspace dir, so the `..` was dropped. `tmp/` is gitignored.
+
+### 6. `@miiajs/testing` is overridden but never installed
+
+`@miiajs/core` has a devDependency `"@miiajs/testing": "workspace:*"` (its own tests use `TestApp`). For a `file:` directory dependency bun still resolves that specifier and fails with `Workspace dependency "@miiajs/testing" not found` unless the name is overridden too. So `use-mode.mjs` also maps `@miiajs/testing` to `file:../miia/packages/testing` in local mode. Nothing here imports it, and it does not land in `node_modules`.
+
+Switching back hits the same wall from the other side: `bun.lock` still holds core as a `file:` dependency, and an install with no overrides at all fails on it (`--force` too). So `use:npm` drops the runtime overrides first, runs one `bun install` with only the testing override, then drops that too and lets the script's own `bun install` finish. The `@miiajs/*` entries in `bun.lock` are re-resolved from npm along the way - revert `bun.lock` if that is not a change you want to commit.
 
 ## Adding a new server
 

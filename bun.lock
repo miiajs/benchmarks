@@ -8,9 +8,9 @@
         "@elysiajs/cors": "^1.4.2",
         "@fastify/cors": "^11.3.0",
         "@hono/node-server": "^2.1.1",
-        "@miiajs/core": "^0.6.0",
-        "@miiajs/node-server": "^0.6.0",
-        "@miiajs/uws-server": "^0.6.0",
+        "@miiajs/core": "^0.8.0",
+        "@miiajs/node-server": "^0.8.0",
+        "@miiajs/uws-server": "^0.8.0",
         "@nestjs/common": "^11.2.1",
         "@nestjs/core": "^11.2.1",
         "@nestjs/platform-fastify": "^11.2.1",
@@ -147,11 +147,11 @@
 
     "@lukeed/csprng": ["@lukeed/csprng@1.1.0", "", {}, "sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA=="],
 
-    "@miiajs/core": ["@miiajs/core@0.6.0", "", {}, "sha512-vt9RCrSJCzTuloKKxNewvQ/pnQPStCGrw0UY14S6JOEuwX/bSdaYllH92zrJbioUdgRRnUozCkBQRBRKUXIuMA=="],
+    "@miiajs/core": ["@miiajs/core@0.8.0", "", {}, "sha512-Nlv/oZKGRgkTiVUKzCl2CbA3v9H993d+aKF1LQTYGgxnLNMx7pYJhblClGT3SyNau9Xvv0xsGRVI8uhJzM4F5g=="],
 
-    "@miiajs/node-server": ["@miiajs/node-server@0.6.0", "", {}, "sha512-jHNRaI6vBImXXrcB5HOnS+RJ8ifoj/d2JIOTDAtwUGW3T3I8u6QymNbHWWxUtwtVfXMmPlfqAChSk3A/XVllLA=="],
+    "@miiajs/node-server": ["@miiajs/node-server@0.8.0", "", {}, "sha512-Z2lqeo2I7QDdsHnX6ym/b67e0/zZBgiDy0O7CTkS5a5BmEIMUcJi5QzaiNwnBRwKe+mu32Kdse1SqVjCQXlvoA=="],
 
-    "@miiajs/uws-server": ["@miiajs/uws-server@0.6.0", "", { "dependencies": { "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.69.0" } }, "sha512-cUXYRrWSOYpmVXLgVqpqNx0pToR6hi2udeyDYbw3Gr8HLOm8sJVOsbkfVt61d2NRVA+FpHjVek10ISY49AbMow=="],
+    "@miiajs/uws-server": ["@miiajs/uws-server@0.8.0", "", { "dependencies": { "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.70.0" } }, "sha512-3Sktq9/7ztcfN56d0ZRKJJjyqY6h8iEohj9gZuFLYc4wk0Bns4nFcXVmvyAVtO3Rp5vLVNoEKuqkfHs46O9LZA=="],
 
     "@minimistjs/subarg": ["@minimistjs/subarg@1.0.0", "", { "dependencies": { "minimist": "^1.1.0" } }, "sha512-Q/ONBiM2zNeYUy0mVSO44mWWKYM3UHuEK43PKIOzJCbvUnPoMH1K+gk3cf1kgnCVJFlWmddahQQCmrmBGlk9jQ=="],
 
@@ -431,7 +431,7 @@
 
     "tsx": ["tsx@4.23.12", "", { "dependencies": { "esbuild": "~0.28.0" }, "optionalDependencies": { "fsevents": "~2.3.3" }, "bin": { "tsx": "dist/cli.mjs" } }, "sha512-FDf4L4sYzKtzWYhU/Xm0AQFdTjdIxNo9ElTf2mxXM6k8YMHXzYUe4yODVaXP4V9uMFbVg8c0qyBccK2OOxb45Q=="],
 
-    "uWebSockets.js": ["uWebSockets.js@github:uNetworking/uWebSockets.js#dddd8ff", {}, "uNetworking-uWebSockets.js-dddd8ff", "sha512-fDaDQQEj+Jn8LsDXGGE629Nna1MGnRS8j9kxsaqtPHBMq3pBDIbKs2sGxk1QMWpQ78+o4F9jV/tuBZZqfanBWQ=="],
+    "uWebSockets.js": ["uWebSockets.js@github:uNetworking/uWebSockets.js#b1092c7", {}, "uNetworking-uWebSockets.js-b1092c7", "sha512-ft7+SY00mttQC2sN9lhVYz6UCJNm+8D8V0zfGFnhG9YmPWcB8sQxJctDyhqcIuzzmzpl2ee+/QV4/jyJE3KscA=="],
 
     "uid": ["uid@2.0.2", "", { "dependencies": { "@lukeed/csprng": "^1.0.0" } }, "sha512-u3xV3X7uzvi5b1MncmZo3i2Aw222Zk1keqLA1YkHldREkAhAqi65wuPfe7lHx8H/Wzy+8CE7S7uS3jekIM5s8g=="],
 
