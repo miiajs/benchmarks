@@ -20,7 +20,7 @@ const SCRIPT_DIR = import.meta.dirname!
 // ─── Types ──────────────────────────────────────────────────
 
 type Runtime = 'bun' | 'node' | 'deno'
-type Scenario = 'get' | 'post' | 'get-api' | 'post-api'
+type Scenario = 'get' | 'post' | 'get-api' | 'post-api' | 'get-scoped'
 type FrameworkId = 'raw' | 'raw-node' | 'raw-uws' | 'miia' | 'miia-uws' | 'hono' | 'elysia' | 'fastify' | 'nest'
 
 interface ServerConfig {
@@ -93,6 +93,11 @@ const SCENARIOS: Record<Scenario, ScenarioConfig> = {
       'x-request-id': 'req-bench-001',
     },
   },
+  'get-scoped': {
+    method: 'GET',
+    path: '/scoped',
+    headers: { 'x-user-id': '42' },
+  },
 }
 
 const FRAMEWORKS: { id: FrameworkId; name: string }[] = [
@@ -142,7 +147,17 @@ const REALISTIC_SERVERS: ServerConfig[] = [
   { name: 'NestJS (Node)', framework: 'nest', runtime: 'node', file: 'realistic/node.ts', cwd: 'nest' },
 ]
 
+const SCOPED_SERVERS: ServerConfig[] = [
+  { name: 'MiiaJS (Bun)', framework: 'miia', runtime: 'bun', file: 'servers/scoped/miia.ts' },
+  { name: 'MiiaJS (Node)', framework: 'miia', runtime: 'node', file: 'servers/scoped/miia.ts' },
+  { name: 'MiiaJS (Deno)', framework: 'miia', runtime: 'deno', file: 'servers/scoped/miia.ts' },
+  { name: 'MiiaJS uWS (Node)', framework: 'miia-uws', runtime: 'node', file: 'servers/scoped/miia-uws.ts' },
+  { name: 'NestJS (Bun)', framework: 'nest', runtime: 'bun', file: 'scoped/node.ts', cwd: 'nest' },
+  { name: 'NestJS (Node)', framework: 'nest', runtime: 'node', file: 'scoped/node.ts', cwd: 'nest' },
+]
+
 function getServers(scenario: Scenario): ServerConfig[] {
+  if (scenario === 'get-scoped') return SCOPED_SERVERS
   return scenario === 'get-api' || scenario === 'post-api' ? REALISTIC_SERVERS : SYNTHETIC_SERVERS
 }
 
@@ -400,7 +415,7 @@ function saveResults(results: AggregatedResult[], scenario: Scenario, passes: nu
 
   const now = new Date()
   const ts = now.toISOString().replace(/[T:]/g, '-').slice(0, 16)
-  const type = scenario === 'get-api' || scenario === 'post-api' ? 'realistic' : 'synthetic'
+  const type = scenario === 'get-scoped' ? 'scoped' : scenario === 'get-api' || scenario === 'post-api' ? 'realistic' : 'synthetic'
   const dir = join(SCRIPT_DIR, 'tmp', 'benchmarks', type)
   const file = join(dir, `${scenario}_${ts}.txt`)
 
@@ -480,12 +495,13 @@ async function selectConfig(availableRuntimes: Set<Runtime>): Promise<RunConfig>
           { name: 'POST /json     — JSON Body Parse + UUID', value: 'post' },
           { name: 'GET /api/...   — CORS + JWT + Params', value: 'get-api' },
           { name: 'POST /api/...  — CORS + JWT + Body + Params + Query + Header + UUID', value: 'post-api' },
+          { name: 'GET /scoped    - Request-scoped provider (Miia ctx.resolve vs Nest REQUEST scope)', value: 'get-scoped' },
         ],
         required: true,
       })
 
       scenarios = scenarioSelection.includes('all')
-        ? ['get', 'post', 'get-api', 'post-api']
+        ? ['get', 'post', 'get-api', 'post-api', 'get-scoped']
         : scenarioSelection.filter((v): v is Scenario => v !== 'all')
     }
 

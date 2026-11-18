@@ -9,7 +9,8 @@ run.ts                 — interactive CLI that spawns servers + autocannon, pri
 shared/jwt.ts          — JWT token helper used by the "realistic" (API) scenarios
 servers/synthetic/     — minimal single-route servers (Hello World, JSON echo, etc.)
 servers/realistic/     — CORS + JWT + validation + params servers (mirrors real API workload)
-nest/{synthetic,realistic}/  — NestJS servers (separate tsconfig w/ experimentalDecorators)
+servers/scoped/        - request-scoped provider per request (`get-scoped`, MiiaJS vs NestJS)
+nest/{synthetic,realistic,scoped}/  — NestJS servers (separate tsconfig w/ experimentalDecorators)
 scripts/use-mode.mjs   — toggles `overrides` field between npm and local modes
 tsconfig.json          — root TS config (fully standalone, no extends/references)
 nest/tsconfig.json     — NestJS-only config; tsx auto-picks it per spawn
@@ -24,9 +25,9 @@ There is **no build step, no unit tests, no src/ directory**. This is a script h
 2. `detectRuntimes()` scans for `bun`, `node`, `deno` via `spawnSync --version`.
 3. `selectConfig()` uses `@inquirer/prompts` for interactive selection (scenarios, frameworks, runtime, passes). CLI flags override: `--scenario`, `--passes`, `--only`, `--runtime`, `--all`.
 4. For each `(scenario, server)` pair: spawn server, warm up with autocannon (5s), run N passes (30s each), parse JSON output, aggregate.
-5. `saveResults()` writes a formatted text report to `./tmp/benchmarks/<type>/<scenario>_<ts>.txt`. `<type>` is `synthetic` or `realistic` derived from the scenario.
+5. `saveResults()` writes a formatted text report to `./tmp/benchmarks/<type>/<scenario>_<ts>.txt`. `<type>` is `synthetic`, `realistic` or `scoped` derived from the scenario.
 
-The server registry lives in `SYNTHETIC_SERVERS` and `REALISTIC_SERVERS` arrays inside `run.ts`. Each entry: `{ name, framework, runtime, file, cwd? }`. Adding a new server = write a file in `servers/<type>/`, register one entry in the matching array.
+The server registry lives in `SYNTHETIC_SERVERS`, `REALISTIC_SERVERS` and `SCOPED_SERVERS` arrays inside `run.ts`. Each entry: `{ name, framework, runtime, file, cwd? }`. Adding a new server = write a file in `servers/<type>/`, register one entry in the matching array.
 
 ## Two dependency modes
 

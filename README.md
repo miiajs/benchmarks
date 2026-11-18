@@ -17,7 +17,7 @@ bun run bench
 
 This benchmarks the published `@miiajs/*` packages. To benchmark a local miia checkout instead, see "Dependency modes" below.
 
-The `bench` command launches an interactive CLI that lets you pick scenarios (`get`, `post`, `get-api`, `post-api`), frameworks, runtimes, and number of passes. Results are written to `./tmp/benchmarks/<type>/<scenario>_<timestamp>.txt` and printed to the console.
+The `bench` command launches an interactive CLI that lets you pick scenarios (`get`, `post`, `get-api`, `post-api`, `get-scoped`), frameworks, runtimes, and number of passes. Results are written to `./tmp/benchmarks/<type>/<scenario>_<timestamp>.txt` and printed to the console. `get-scoped` (a request-scoped provider per request) covers MiiaJS and NestJS only.
 
 ## Dependency modes
 
@@ -46,4 +46,4 @@ Bun installs `file:` packages as per-file symlinks into `../miia/packages/<name>
 
 ## Output
 
-Benchmark results are written to `./tmp/benchmarks/<type>/<scenario>_<timestamp>.txt`, where `<type>` is `synthetic` or `realistic` depending on the scenario. The `tmp/` directory is gitignored.
+Benchmark results are written to `./tmp/benchmarks/<type>/<scenario>_<timestamp>.txt`, where `<type>` is `synthetic`, `realistic` or `scoped` depending on the scenario. The `tmp/` directory is gitignored.
