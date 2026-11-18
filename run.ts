@@ -21,7 +21,7 @@ const SCRIPT_DIR = import.meta.dirname!
 
 type Runtime = 'bun' | 'node' | 'deno'
 type Scenario = 'get' | 'post' | 'get-api' | 'post-api'
-type FrameworkId = 'raw' | 'raw-node' | 'raw-uws' | 'miia' | 'miia-uws' | 'hono' | 'hono-uws' | 'elysia' | 'fastify' | 'nest'
+type FrameworkId = 'raw' | 'raw-node' | 'raw-uws' | 'miia' | 'miia-uws' | 'hono' | 'elysia' | 'fastify' | 'nest'
 
 interface ServerConfig {
   name: string
@@ -102,7 +102,6 @@ const FRAMEWORKS: { id: FrameworkId; name: string }[] = [
   { id: 'miia', name: 'MiiaJS' },
   { id: 'miia-uws', name: 'MiiaJS (uWS)' },
   { id: 'hono', name: 'Hono' },
-  { id: 'hono-uws', name: 'Hono (uWS)' },
   { id: 'elysia', name: 'Elysia (Bun only)' },
   { id: 'fastify', name: 'Fastify' },
   { id: 'nest', name: 'NestJS' },
@@ -121,7 +120,6 @@ const SYNTHETIC_SERVERS: ServerConfig[] = [
   { name: 'Hono (Bun)', framework: 'hono', runtime: 'bun', file: 'servers/synthetic/hono.ts' },
   { name: 'Hono (Node)', framework: 'hono', runtime: 'node', file: 'servers/synthetic/hono.ts' },
   { name: 'Hono (Deno)', framework: 'hono', runtime: 'deno', file: 'servers/synthetic/hono.ts' },
-  { name: 'Hono uWS (Node)', framework: 'hono-uws', runtime: 'node', file: 'servers/synthetic/hono-uws.ts' },
   { name: 'Elysia (Bun)', framework: 'elysia', runtime: 'bun', file: 'servers/synthetic/elysia-bun.ts' },
   { name: 'Fastify (Bun)', framework: 'fastify', runtime: 'bun', file: 'servers/synthetic/fastify.ts' },
   { name: 'Fastify (Node)', framework: 'fastify', runtime: 'node', file: 'servers/synthetic/fastify.ts' },
@@ -137,7 +135,6 @@ const REALISTIC_SERVERS: ServerConfig[] = [
   { name: 'Hono (Bun)', framework: 'hono', runtime: 'bun', file: 'servers/realistic/hono.ts' },
   { name: 'Hono (Node)', framework: 'hono', runtime: 'node', file: 'servers/realistic/hono.ts' },
   { name: 'Hono (Deno)', framework: 'hono', runtime: 'deno', file: 'servers/realistic/hono.ts' },
-  { name: 'Hono uWS (Node)', framework: 'hono-uws', runtime: 'node', file: 'servers/realistic/hono-uws.ts' },
   { name: 'Elysia (Bun)', framework: 'elysia', runtime: 'bun', file: 'servers/realistic/elysia.ts' },
   { name: 'Fastify (Bun)', framework: 'fastify', runtime: 'bun', file: 'servers/realistic/fastify.ts' },
   { name: 'Fastify (Node)', framework: 'fastify', runtime: 'node', file: 'servers/realistic/fastify.ts' },
