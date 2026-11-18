@@ -105,7 +105,7 @@ const FRAMEWORKS: { id: FrameworkId; name: string }[] = [
   { id: 'hono-uws', name: 'Hono (uWS)' },
   { id: 'elysia', name: 'Elysia (Bun only)' },
   { id: 'fastify', name: 'Fastify' },
-  { id: 'nest', name: 'NestJS+Fastify' },
+  { id: 'nest', name: 'NestJS' },
 ]
 
 const SYNTHETIC_SERVERS: ServerConfig[] = [
@@ -125,8 +125,8 @@ const SYNTHETIC_SERVERS: ServerConfig[] = [
   { name: 'Elysia (Bun)', framework: 'elysia', runtime: 'bun', file: 'servers/synthetic/elysia-bun.ts' },
   { name: 'Fastify (Bun)', framework: 'fastify', runtime: 'bun', file: 'servers/synthetic/fastify.ts' },
   { name: 'Fastify (Node)', framework: 'fastify', runtime: 'node', file: 'servers/synthetic/fastify.ts' },
-  { name: 'NestJS+Fastify (Bun)', framework: 'nest', runtime: 'bun', file: 'synthetic/fastify.ts', cwd: 'nest' },
-  { name: 'NestJS+Fastify (Node)', framework: 'nest', runtime: 'node', file: 'synthetic/fastify.ts', cwd: 'nest' },
+  { name: 'NestJS (Bun)', framework: 'nest', runtime: 'bun', file: 'synthetic/node.ts', cwd: 'nest' },
+  { name: 'NestJS (Node)', framework: 'nest', runtime: 'node', file: 'synthetic/node.ts', cwd: 'nest' },
 ]
 
 const REALISTIC_SERVERS: ServerConfig[] = [
@@ -141,8 +141,8 @@ const REALISTIC_SERVERS: ServerConfig[] = [
   { name: 'Elysia (Bun)', framework: 'elysia', runtime: 'bun', file: 'servers/realistic/elysia.ts' },
   { name: 'Fastify (Bun)', framework: 'fastify', runtime: 'bun', file: 'servers/realistic/fastify.ts' },
   { name: 'Fastify (Node)', framework: 'fastify', runtime: 'node', file: 'servers/realistic/fastify.ts' },
-  { name: 'NestJS+Fastify (Bun)', framework: 'nest', runtime: 'bun', file: 'realistic/fastify.ts', cwd: 'nest' },
-  { name: 'NestJS+Fastify (Node)', framework: 'nest', runtime: 'node', file: 'realistic/fastify.ts', cwd: 'nest' },
+  { name: 'NestJS (Bun)', framework: 'nest', runtime: 'bun', file: 'realistic/node.ts', cwd: 'nest' },
+  { name: 'NestJS (Node)', framework: 'nest', runtime: 'node', file: 'realistic/node.ts', cwd: 'nest' },
 ]
 
 function getServers(scenario: Scenario): ServerConfig[] {

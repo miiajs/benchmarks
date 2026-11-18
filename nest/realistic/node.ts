@@ -1,8 +1,7 @@
 import 'reflect-metadata'
 import { Controller, Get, Post, Body, Param, Query, Req, HttpCode, Module } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
-import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify'
-import type { FastifyRequest } from 'fastify'
+import { NodeAdapter, type NestNodeApplication, type NodeRequest } from '@nestjs/platform-node'
 import { verifyToken } from '../../shared/jwt.js'
 
 @Controller()
@@ -16,7 +15,7 @@ class AppController {
   async getPost(
     @Param('userId') userId: string,
     @Param('postId') postId: string,
-    @Req() req: FastifyRequest,
+    @Req() req: NodeRequest,
   ) {
     const user = await verifyToken(req.headers.authorization!.slice(7))
     return { userId, postId, user }
@@ -30,7 +29,7 @@ class AppController {
     @Query('notify') notify: string,
     @Query('format') format: string,
     @Body() body: { title: string; priority: string },
-    @Req() req: FastifyRequest,
+    @Req() req: NodeRequest,
   ) {
     const user = await verifyToken(req.headers.authorization!.slice(7))
     return {
@@ -50,6 +49,6 @@ class AppController {
 @Module({ controllers: [AppController] })
 class AppModule {}
 
-const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), { logger: false })
+const app = await NestFactory.create<NestNodeApplication>(AppModule, new NodeAdapter(), { logger: false })
 app.enableCors()
-await app.listen({ port: Number(process.env.PORT) || 3000, host: 'localhost' })
+await app.listen(Number(process.env.PORT) || 3000, 'localhost')
